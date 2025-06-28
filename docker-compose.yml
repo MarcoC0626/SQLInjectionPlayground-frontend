@@ -1,0 +1,75 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - FAST_REFRESH=true
+      - WDS_SOCKET_PORT=3000
+      - REACT_APP_API_URL=http://localhost:3001/api
+    stdin_open: true
+    tty: true
+    networks:
+      - playground-network
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ../SQLInjectionPlaygroundBackend
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    volumes:
+      - ../SQLInjectionPlaygroundBackend:/SQLInjectionPlaygroundBackend
+      - /SQLInjectionPlaygroundBackend/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - HOST=0.0.0.0
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DB=SQLInjectionPlayground
+      - MYSQL_USER=root
+      - MYSQL_PASS=rootpassword
+    stdin_open: true
+    tty: true
+    networks:
+      - playground-network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    build:
+      context: ../SQLInjectionPlaygroundMySQL
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - playground-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  playground-network:
+    name: playground-network
+    driver: bridge
+
+volumes:
+  mysql_data: 

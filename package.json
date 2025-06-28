@@ -1,0 +1,52 @@
+{
+  "name": "stockscanner-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^5.24.9",
+    "axios": "^1.9.0",
+    "history": "^4.10.1",
+    "mobx-react": "^4.1.8",
+    "mobx-react-router": "^3.0.0",
+    "react": "^16.14.0",
+    "react-dom": "^16.8.0",
+    "react-router": "^3.2.3",
+    "react-scripts": "5.0.1",
+    "recharts": "^2.15.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "start-watch": "WATCHPACK_POLLING=true CHOKIDAR_USEPOLLING=true react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.1",
+    "@babel/plugin-proposal-decorators": "^7.27.1",
+    "@babel/preset-env": "^7.27.1",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.2.1"
+  }
+}
