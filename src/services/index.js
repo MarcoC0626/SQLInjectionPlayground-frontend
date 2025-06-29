@@ -3,7 +3,8 @@ import { api } from './api';
 class services {
     async getInjectable(params) {
         try {
-            const response = await api.get('/playground/injectable', params);
+            console.log("params: ", params);
+            const response = await api.get('/playground/injectable', { params });
             return response.data
         } catch (error) {
             console.error('Error getting scanned results:', error);
@@ -13,7 +14,7 @@ class services {
 
     async getNonInjectable(params) {
         try {
-            const response = await api.get('/playground/non-injectable', params);
+            const response = await api.get('/playground/non-injectable', { params });
             return response.data
         } catch (error) {
             console.error('Error getting scanned results:', error);

@@ -26,13 +26,13 @@ services:
 
   backend:
     build:
-      context: ../SQLInjectionPlaygroundBackend
+      context: ../SQLInjectionPlayground-backend
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
     volumes:
-      - ../SQLInjectionPlaygroundBackend:/SQLInjectionPlaygroundBackend
-      - /SQLInjectionPlaygroundBackend/node_modules
+      - ../SQLInjectionPlayground-backend:/SQLInjectionPlayground
+      - /SQLInjectionPlayground/node_modules
     environment:
       - NODE_ENV=development
       - PORT=3001
@@ -52,7 +52,7 @@ services:
 
   mysql:
     build:
-      context: ../SQLInjectionPlaygroundMySQL
+      context: ../SQLInjectionPlayground-mysql
       dockerfile: Dockerfile
     ports:
       - "3306:3306"

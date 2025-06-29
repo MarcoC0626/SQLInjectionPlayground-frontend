@@ -32,8 +32,9 @@ class SQLInjectionStore {
         this.setLoading(true);
         this.setError(null);
         try {
-            const response = await apiService.getInjectable({ username: this.username });
-            this.setResult(response.data);
+            console.log("username: ", this.username);
+            const response = await apiService.getInjectable({ string: this.username });
+            this.setResult(response);
         } catch (error) {
             this.setError(error.response?.data?.error || error.message);
         } finally {
@@ -45,8 +46,8 @@ class SQLInjectionStore {
         this.setLoading(true);
         this.setError(null);
         try {
-            const response = await apiService.getNonInjectable({ username: this.username });
-            this.setResult(response.data);
+            const response = await apiService.getNonInjectable({ string: this.username });
+            this.setResult(response);
         } catch (error) {
             this.setError(error.response?.data?.error || error.message);
         } finally {
