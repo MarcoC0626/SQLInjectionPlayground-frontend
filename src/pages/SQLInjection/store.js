@@ -28,6 +28,24 @@ class SQLInjectionStore {
         this.error = error;
     }
 
+    async checkBackendConnection() {
+        try {
+            await apiService.healthCheck();
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
+    async checkDatabaseConnection() {
+        try {
+            await apiService.dbHealthCheck();
+            return true;
+        } catch (error) {
+            return false;
+        }
+    }
+
     async testInjectable() {
         this.setLoading(true);
         this.setError(null);
