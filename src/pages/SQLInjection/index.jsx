@@ -57,22 +57,6 @@ export default class SQLInjectionPage extends Component {
         }
     };
 
-    componentDidUpdate(prevProps) {
-        // Check if results just appeared
-        if ((!prevProps?.store?.result && store.result) || (!prevProps?.store?.error && store.error)) {
-            this.scrollToResult();
-        }
-    }
-
-    scrollToResult = () => {
-        if (this.resultRef.current) {
-            this.resultRef.current.scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'center'
-            });
-        }
-    }
-
     getColumns(data) {
         if (!data || !data[0]) return [];
         return Object.keys(data[0]).map(key => ({
@@ -177,22 +161,30 @@ export default class SQLInjectionPage extends Component {
                         </Button>
                     </Space>
 
-                    {(store.result || store.error) && (
-                        <Card title="Result" ref={this.resultRef}>
-                            {store.error ? (
-                                <Text type="danger">{store.error}</Text>
-                            ) : Array.isArray(store.result) ? (
-                                <Table 
-                                    dataSource={store.result}
-                                    columns={this.getColumns(store.result)}
-                                    rowKey={(record, index) => index}
-                                    pagination={false}
-                                />
-                            ) : (
-                                <pre>{JSON.stringify(store.result, null, 2)}</pre>
-                            )}
-                        </Card>
-                    )}
+                    {/* Result Section with fixed height container */}
+                    <div style={{ 
+                        minHeight: '500px',
+                        transition: 'min-height 0.3s ease-in-out',
+                        overflow: 'hidden'
+                    }}>
+                        {(store.result || store.error) && (
+                            <Card title="Result" ref={this.resultRef}>
+                                {store.error ? (
+                                    <Text type="danger">{store.error}</Text>
+                                ) : Array.isArray(store.result) ? (
+                                    <Table 
+                                        dataSource={store.result}
+                                        columns={this.getColumns(store.result)}
+                                        rowKey={(record, index) => index}
+                                        pagination={false}
+                                        scroll={{ y: 240 }}
+                                    />
+                                ) : (
+                                    <pre>{JSON.stringify(store.result, null, 2)}</pre>
+                                )}
+                            </Card>
+                        )}
+                    </div>
                 </Space>
             </div>
         );

@@ -52,7 +52,7 @@ class SQLInjectionStore {
         try {
             console.log("username: ", this.username);
             const response = await apiService.getInjectable({ string: this.username });
-            this.setResult(response);
+            this.setResult(response.data);
         } catch (error) {
             this.setError(error.response?.data?.error || error.message);
         } finally {
@@ -65,7 +65,7 @@ class SQLInjectionStore {
         this.setError(null);
         try {
             const response = await apiService.getNonInjectable({ string: this.username });
-            this.setResult(response);
+            this.setResult(response.data);
         } catch (error) {
             this.setError(error.response?.data?.error || error.message);
         } finally {
