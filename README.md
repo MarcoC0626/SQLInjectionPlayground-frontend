@@ -27,6 +27,7 @@ parent_folder_of_your_choice/
 - SQLInjectionPlayground-mysql
 
 ```bash
+# You can copy the link and go to the repo directly if you wish
 # Frontend repository
 git clone https://github.com/MarcoC0626/SQLInjectionPlayground-frontend.git
 
