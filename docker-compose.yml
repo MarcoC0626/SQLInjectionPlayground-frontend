@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   frontend:
+    container_name: sqlinjectionplayground-frontend
     build: 
       context: .
       dockerfile: Dockerfile
@@ -25,6 +26,7 @@ services:
       - backend
 
   backend:
+    container_name: sqlinjectionplayground-backend
     build:
       context: ../SQLInjectionPlayground-backend
       dockerfile: Dockerfile
@@ -51,6 +53,7 @@ services:
         condition: service_healthy
 
   mysql:
+    container_name: sqlinjectionplayground-mysql
     build:
       context: ../SQLInjectionPlayground-mysql
       dockerfile: Dockerfile
