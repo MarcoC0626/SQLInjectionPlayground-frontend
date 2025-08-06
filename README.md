@@ -22,9 +22,9 @@ This project consists of three main components:
 Clone all three required repositories. Make sure you clone all three repos inside the same folder, the resultant file should look like:
 
 parent_folder_of_your_choice/
----SQLInjectionPlayground-frontend
----SQLInjectionPlayground-backend
----SQLInjectionPlayground-mysql
+- SQLInjectionPlayground-frontend
+- SQLInjectionPlayground-backend
+- SQLInjectionPlayground-mysql
 
 ```bash
 # Frontend repository
